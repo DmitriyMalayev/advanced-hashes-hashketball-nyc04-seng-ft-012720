@@ -133,8 +133,8 @@ def player_stats(player_name)
     team.each do |attribute, data|
      if attribute == :players
        data.each do |player|
-        if player[:player_name] == player_name
-          player.delete(:player_name)
+        if player[:players_name] == player_name
+          player.delete(:players_name)
           return player
         end
        end
@@ -159,24 +159,9 @@ def big_shoe_rebounds
 end
 
 
-def most_points_scored
-
-  most_points = 0
-  points_owner = ""
-  game_hash.values.each do |team_info|
-    team_info[:players].each do |player|
-      if player[:points] > most_points
-        most_points = player[:points]
-        points_owner = player[:player_name]
-      end
-    end
-  end
-  return points_owner
-end
 
 
 def winning_team
-
   top_team = {}
   game_hash.values.each do |team_info|
     team_points = 0
@@ -189,20 +174,7 @@ def winning_team
 end
 
 
-def player_with_longest_name
-
-  longest_name = []
-  game_hash.values.each do |team_info|
-    team_info[:players].each do |player|
-      longest_name << player[:player_name]
-    end
-  end
-longest_name.max_by{|name| name.length}
-end
-
-
 def long_name_steals_a_ton?
-
  longest = {}
   game_hash.values.each do |team_info|
     team_info[:players].each do |player|
